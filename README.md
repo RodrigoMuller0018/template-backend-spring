@@ -34,11 +34,12 @@ Relatório de cobertura: `target/site/jacoco/index.html`.
 
 1. **Renomeie** o `artifactId`/`name` no `pom.xml` e o pacote `io.github.rodrigomuller0018.template`.
 2. **Apague a feature `tarefa`** (código, testes e a migração) quando criar a primeira feature real. Use-a como referência antes disso.
-3. **Proteja a `main`:** *Settings → Rules → Rulesets → New branch ruleset*, alvo `main`, marcando:
+3. **Ligue o Dependency graph:** *Settings → Advanced Security → Dependabot alerts → Enable* (liga o grafo junto). Sem ele, o check `Dependências vulneráveis` falha em todo PR com "Dependency review is not supported on this repository".
+4. **Proteja a `main`:** *Settings → Rules → Rulesets → New branch ruleset*, alvo `main`, marcando:
    - *Require a pull request before merging*
    - *Require status checks to pass* → adicione `Build, testes e análise estática`, `Segredos no código` e `Dependências vulneráveis`
    - *Block force pushes*
-4. **SonarQube Cloud (opcional, grátis em repositório público):**
+5. **SonarQube Cloud (opcional, grátis em repositório público):**
    1. Entre em [sonarcloud.io](https://sonarcloud.io) com o GitHub e importe o repositório.
    2. Em *Settings → Secrets and variables → Actions*:
       - Secret `SONAR_TOKEN`: o token gerado no Sonar
