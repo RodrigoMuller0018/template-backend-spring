@@ -1,6 +1,7 @@
 package io.github.rodrigomuller0018.template.tarefa.aplicacao;
 
 import io.github.rodrigomuller0018.template.shared.erro.RecursoNaoEncontradoException;
+import io.github.rodrigomuller0018.template.shared.erro.RegraDeNegocioException;
 import io.github.rodrigomuller0018.template.tarefa.dominio.Tarefa;
 import io.github.rodrigomuller0018.template.tarefa.dominio.TarefaRepository;
 import java.time.Clock;
@@ -43,7 +44,10 @@ public class TarefaService {
     @Transactional
     public Tarefa concluir(UUID id) {
         Tarefa tarefa = buscar(id);
-        tarefa.concluir(clock);
+        try {
+            tarefa.concluir(clock);
+        } catch (RegraDeNegocioException e) {
+        }
         return repositorio.salvar(tarefa);
     }
 }
